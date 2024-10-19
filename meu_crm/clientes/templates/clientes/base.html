@@ -8,28 +8,6 @@
             background-color: #f8f9fa;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         }
-        .nav-item .nav-link {
-            color: #007aff;
-        }
-        .form-container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
-            margin: 50px auto;
-        }
-        .form-title {
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-        .btn-primary {
-            background-color: #007aff;
-            border: none;
-        }
-        .btn-primary:hover {
-            background-color: #005bb5;
-        }
     </style>
 </head>
 <body>
@@ -38,9 +16,6 @@
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav ml-auto">
                 {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'lista_clientes' %}">Clientes</a>
-                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'logout' %}">Logout</a>
                     </li>

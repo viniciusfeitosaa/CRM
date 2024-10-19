@@ -1,14 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Lista de Clientes</title>
-</head>
-<body>
-    <h1>Clientes</h1>
-    <ul>
-        {% for cliente in clientes %}
-            <li>{{ cliente.nome }} - {{ cliente.email }} - {{ cliente.telefone }}</li>
-        {% endfor %}
-    </ul>
-</body>
-</html>
+{% extends 'clientes/dashboard_base.html' %}
+{% block title %}Clientes{% endblock %}
+{% block content %}
+<h1>Clientes</h1>
+<ul>
+    {% for cliente in clientes %}
+        <li>{{ cliente.nome }} - {{ cliente.email }} - {{ cliente.telefone }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

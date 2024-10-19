@@ -4,6 +4,26 @@ from .models import Cliente
 from .forms import RegistroForm, LoginForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
+
+def login_view(request):
+    if request.method == 'POST':
+        form = LoginForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('dashboard')  # Redirecionar para o dashboard
+    else:
+        form = LoginForm()
+    return render(request, 'clientes/login.html', {'form': form})
+
+@login_required
+def dashboard(request):
+    return render(request, 'clientes/dashboard.html')
+
 
 def logout_view(request):
     logout(request)
@@ -27,12 +47,11 @@ def registro(request):
     if request.method == 'POST':
         form = RegistroForm(request.POST)
         if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
+            user = form.save()
             raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
+            user = authenticate(username=user.username, password=raw_password)
             login(request, user)
-            return redirect('home')
+            return redirect('lista_clientes')  # Redirecionar para a lista de clientes
     else:
         form = RegistroForm()
     return render(request, 'clientes/registro.html', {'form': form})
